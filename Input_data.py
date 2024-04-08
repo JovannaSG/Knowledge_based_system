@@ -10,6 +10,7 @@ class InputDataForm(QtWidgets.QWidget):
     _FLAG_ACCEPT_BTN: bool = True
     # _REGEX_CALC_TYPE = r"\d+.?\d+ - \d+.?\d+"
     # _REGEX_REAL_NUMBER = r"\d+[.]\d+"
+    # [-+]?[0-9]*\.?[0-9]*
 
     _result_list: dict
 
@@ -97,7 +98,8 @@ class InputDataForm(QtWidgets.QWidget):
             w: QtWidgets.QWidget = self.ui.listWidget_4.itemAt(i).widget()
             if w.text() != "":
                 try:                
-                    _range = PROPERTIES[self.ui.propertyList.currentItem().text()]["значения"][0].split(" ")
+                    _range = PROPERTIES[self.ui.propertyList.currentItem().text()]["значения"][0]\
+                        .split(" ")
                     if float(w.text()) < float(_range[0]) or\
                         float(w.text()) > float(_range[2]):
                         QtWidgets.QMessageBox.warning(

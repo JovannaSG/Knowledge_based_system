@@ -17,8 +17,12 @@ class Example(QtWidgets.QMainWindow):
         # connect signals to buttons
         self.ui.printAlloysBtn.clicked.connect(self.printAlloys)
         self.ui.printPropertiesBtn.clicked.connect(self.printProperties)
-        self.ui.printPossibleValuesBtn.clicked.connect(self.printPossiblesValues)
-        self.ui.printDescriptionPropertiesBtn.clicked.connect(self.printDescriptionProperties)
+        self.ui.printPossibleValuesBtn.clicked.connect(
+            self.printPossiblesValues
+        )
+        self.ui.printDescriptionPropertiesBtn.clicked.connect(
+            self.printDescriptionProperties
+        )
         self.ui.printValuesAlloyBtn.clicked.connect(self.printValuesAlloy)
         self.ui.addButton.clicked.connect(self.add)
         self.ui.CheckFullKnowledge.clicked.connect(self.isFullKnowledge)
@@ -121,7 +125,10 @@ class Example(QtWidgets.QMainWindow):
         #adding new property
         if self.ui.label_2.text() == "Введите название свойства":
             if self.ui.lineEdit.text() != "":
-                PROPERTIES[self.ui.lineEdit.text()] = {"тип": None, "значения": []}
+                PROPERTIES[self.ui.lineEdit.text()] = {
+                    "тип": None,
+                    "значения": []
+                }
                 self.ui.resultList.clear()
                 for i in range(len(PROPERTIES)):
                     self.ui.resultList.insertItem(i, list(PROPERTIES)[i])

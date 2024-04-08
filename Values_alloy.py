@@ -112,7 +112,8 @@ class ValuesAlloyForm(QtWidgets.QWidget):
                 w: QtWidgets.QWidget = self.ui.listWidget.itemAt(i).widget()
                 if w.text() != "":
                     try:
-                        _range = PROPERTIES[self.ui.propertyList.currentItem().text()]["значения"][0].split(" ")
+                        _range = PROPERTIES[self.ui.propertyList.currentItem().text()]["значения"][0]\
+                            .split(" ")
                         if float(w.text()) < float(_range[0]) or\
                             float(w.text()) > float(_range[2]):
                             QtWidgets.QMessageBox.warning(

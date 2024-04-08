@@ -1,3 +1,5 @@
+import re
+
 from PyQt5 import QtWidgets
 
 from UI.test_pv import Ui_PossiblesValues
@@ -5,23 +7,38 @@ from db import PROPERTIES
 
 
 class PossiblesValuesForm(QtWidgets.QWidget):
+    #r"\d+.?\d+ - \d+.?\d+"
+    _REGEX_CALC_TYPE = r"[0-9]*\.?[0-9]* - [0-9]+"
+
     def __init__(self) -> None:
         super().__init__()
         self.ui = Ui_PossiblesValues()
         self.ui.setupUi(self)
 
         # signals
-        self.ui.propertiesList.currentIndexChanged.connect(self.propertiesListChanged)
+        self.ui.propertiesList.currentIndexChanged.connect(
+            self.propertiesListChanged
+        )
         self.ui.listWidget.itemDoubleClicked.connect(self.delElement)
         self.ui.pushButton.clicked.connect(self.addBtn)
-        self.ui.comboBox.currentIndexChanged.connect(self.fillingComboBox)
+        self.ui.propertiesList.currentIndexChanged.connect(self.fillComboBox)
 
-        # add values in comboBox
         for i in range(len(PROPERTIES.keys())):
             self.ui.propertiesList.insertItem(i, list(PROPERTIES)[i])
 
-    def fillingComboBox(self):
-        pass
+        # add values in comboBox
+        self.ui.comboBox.setPlaceholderText("")
+        self.ui.comboBox.insertItem(0, "перечислимый")
+        self.ui.comboBox.insertItem(1, "исчислимый")
+        self.fillComboBox()
+
+    def fillComboBox(self):
+        if PROPERTIES[self.ui.propertiesList.currentText()]["тип"] == "исчислимый":
+            self.ui.comboBox.setCurrentIndex(1)
+        elif PROPERTIES[self.ui.propertiesList.currentText()]["тип"] == "перечислимый":
+            self.ui.comboBox.setCurrentIndex(0)
+        else:
+            self.ui.comboBox.setCurrentIndex(-1)
 
     def updateList(self) -> None:
         self.ui.listWidget.clear()
@@ -29,54 +46,77 @@ class PossiblesValuesForm(QtWidgets.QWidget):
         for i in PROPERTIES.keys():
             if i == self.cur:
                 for j in range(len(PROPERTIES[i]["значения"])):
-                    self.ui.listWidget.insertItem(j, str(PROPERTIES[i]["значения"][j]))
+                    self.ui.listWidget.insertItem(
+                        j,
+                        str(PROPERTIES[i]["значения"][j])
+                    )
 
-    def checkValues(self, values, inputValue: str) -> bool:
-        for ls in values:
-            for e in ls:
-                if e == inputValue:
-                    return False
-        return True
+    def checkValues(self, values: dict, inputValue: str) -> bool:
+        for el in values["значения"]:
+            if el.lower() == inputValue.lower():
+                return True
+        return False
 
     def addBtn(self) -> None:
-        print(PROPERTIES[self.ui.propertiesList.currentText()])
-        if self.ui.inputLine_2.text() == "" and\
-           PROPERTIES[self.ui.propertiesList.currentText()]["тип"] is None:
+        if self.ui.inputLine.text() == "":
             QtWidgets.QMessageBox.warning(
                 self,
                 "Информация",
-                "Тип свойства не задан"
+                "Поле ввода значения пустое"
             )
             return
 
-        if self.ui.inputLine_2.text() != "":
-            if self.ui.inputLine_2.text() != "исчислимый" and\
-                self.ui.inputLine_2.text() != "перечислимый":
+        if self.checkValues(
+            PROPERTIES[self.ui.propertiesList.currentText()],
+            self.ui.inputLine.text()
+        ):
+            QtWidgets.QMessageBox.warning(
+                self,
+                "Информация",
+                "Значение свойства уже существует"
+            )
+            return
+
+        if self.ui.comboBox.currentText() == "":
+            QtWidgets.QMessageBox.warning(
+                self,
+                "Информация",
+                "Не выбран тип свойства"
+            )
+            return
+
+        if PROPERTIES[self.ui.propertiesList.currentText()]["тип"] == "перечислимый":
+            PROPERTIES[self.ui.propertiesList.currentText()]["тип"] = self.ui.comboBox.currentText()
+            PROPERTIES[self.ui.propertiesList.currentText()]["значения"]\
+                .append(self.ui.inputLine.text())
+            self.updateList()
+            QtWidgets.QMessageBox.about(
+                self,
+                "Информация",
+                "Элемент успешно добавлен"
+            )
+        elif PROPERTIES[self.ui.propertiesList.currentText()]["тип"] == "исчислимый":
+            regex = re.compile(self._REGEX_CALC_TYPE)
+            if not regex.match(self.ui.inputLine.text()):
                 QtWidgets.QMessageBox.warning(
                     self,
                     "Информация",
-                    "Неверный тип свойства"
+                    "Значение диапозона введено неверно"
                 )
-                return
-
-        if not (self.checkValues(PROPERTIES.values(), self.ui.inputLine.text()) and self.ui.inputLine.text() != ""):
-            QtWidgets.QMessageBox.warning(
-                self,
-                "Информация",
-                "Элемент уже есть или поле ввода пустое"
-            )
-            return
-
-        PROPERTIES[self.ui.propertiesList.currentText()]["тип"] = self.ui.inputLine_2.text()
-        PROPERTIES[self.ui.propertiesList.currentText()]["значения"]\
-            .append(self.ui.inputLine.text())
-        self.updateList()
-        QtWidgets.QMessageBox.about(
-            self,
-            "Информация",
-            "Элемент успешно добавлен"
-        )
-        self.ui.inputLine.clear()
+            else:
+                PROPERTIES[self.ui.propertiesList.currentText()]["тип"] = self.ui.comboBox.currentText()
+                if len(PROPERTIES[self.ui.propertiesList.currentText()]["значения"]) == 0:
+                    PROPERTIES[self.ui.propertiesList.currentText()]["значения"]\
+                        .append(self.ui.inputLine.text())
+                else:
+                    PROPERTIES[self.ui.propertiesList.currentText()]["значения"][0] = self.ui.inputLine.text()
+                self.updateList()
+                QtWidgets.QMessageBox.about(
+                    self,
+                    "Информация",
+                    "Элемент успешно добавлен"
+                )
+            self.ui.inputLine.clear()
 
     def changeTextOnLabel(self) -> None:
         if self.ui.propertiesList.currentText() == "Способ обработки":
@@ -88,7 +128,7 @@ class PossiblesValuesForm(QtWidgets.QWidget):
         elif self.ui.propertiesList.currentText() == "Предел прочности":
             self.ui.label.setText("Введите предел прочности")
         elif self.ui.propertiesList.currentText() == "Относительное удлинение после разрыва":
-            self.ui.label.setText("Введите величину относительного удлинения")
+            self.ui.label.setText("Введите диапозон (число - число)")
         else:
             self.ui.label.setText("Введите значение")
 
@@ -100,7 +140,10 @@ class PossiblesValuesForm(QtWidgets.QWidget):
         for i in PROPERTIES.keys():
             if i == self.cur:
                 for j in range(len(PROPERTIES[i]["значения"])):
-                    self.ui.listWidget.insertItem(j, str(PROPERTIES[i]["значения"][j]))
+                    self.ui.listWidget.insertItem(
+                        j,
+                        str(PROPERTIES[i]["значения"][j])
+                    )
 
     # checking when deleting
     def checkBtn(self) -> bool:

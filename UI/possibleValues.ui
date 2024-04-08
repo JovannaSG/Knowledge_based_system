@@ -34,9 +34,9 @@
   <widget class="QComboBox" name="propertiesList">
    <property name="geometry">
     <rect>
-     <x>100</x>
-     <y>10</y>
-     <width>571</width>
+     <x>90</x>
+     <y>20</y>
+     <width>581</width>
      <height>31</height>
     </rect>
    </property>
@@ -72,7 +72,7 @@
    </property>
    <property name="font">
     <font>
-     <pointsize>10</pointsize>
+     <pointsize>14</pointsize>
     </font>
    </property>
   </widget>
@@ -133,21 +133,6 @@
     <string>Для удаления объекта из списка дважды кликните по нему</string>
    </property>
   </widget>
-  <widget class="QLineEdit" name="inputLine_2">
-   <property name="geometry">
-    <rect>
-     <x>20</x>
-     <y>390</y>
-     <width>531</width>
-     <height>31</height>
-    </rect>
-   </property>
-   <property name="font">
-    <font>
-     <pointsize>10</pointsize>
-    </font>
-   </property>
-  </widget>
   <widget class="QLabel" name="label_2">
    <property name="geometry">
     <rect>
@@ -163,21 +148,21 @@
     </font>
    </property>
    <property name="text">
-    <string>Введите тип свойства (исчислимый, перечислимый)</string>
+    <string>Выберите тип свойства</string>
    </property>
   </widget>
   <widget class="QComboBox" name="comboBox">
    <property name="geometry">
     <rect>
-     <x>420</x>
-     <y>330</y>
-     <width>331</width>
-     <height>21</height>
+     <x>20</x>
+     <y>390</y>
+     <width>531</width>
+     <height>31</height>
     </rect>
    </property>
    <property name="font">
     <font>
-     <pointsize>12</pointsize>
+     <pointsize>14</pointsize>
     </font>
    </property>
   </widget>

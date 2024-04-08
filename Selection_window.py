@@ -12,7 +12,9 @@ class SelectionWindowForm(QtWidgets.QWidget):
         self.ui.setupUi(self)
 
         # signals
-        self.ui.openKnowledgeEditorWindow.clicked.connect(self.openKnowledgeEditor)
+        self.ui.openKnowledgeEditorWindow.clicked.connect(
+            self.openKnowledgeEditor
+        )
         self.ui.openInputDataWindow.clicked.connect(self.openInputData)
 
     def openKnowledgeEditor(self) -> None:
