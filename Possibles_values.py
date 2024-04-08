@@ -10,16 +10,18 @@ class PossiblesValuesForm(QtWidgets.QWidget):
         self.ui = Ui_PossiblesValues()
         self.ui.setupUi(self)
 
-        # connect signal (when comboBox changed)
+        # signals
         self.ui.propertiesList.currentIndexChanged.connect(self.propertiesListChanged)
         self.ui.listWidget.itemDoubleClicked.connect(self.delElement)
-
-        # buttons
         self.ui.pushButton.clicked.connect(self.addBtn)
+        self.ui.comboBox.currentIndexChanged.connect(self.fillingComboBox)
 
         # add values in comboBox
         for i in range(len(PROPERTIES.keys())):
             self.ui.propertiesList.insertItem(i, list(PROPERTIES)[i])
+
+    def fillingComboBox(self):
+        pass
 
     def updateList(self) -> None:
         self.ui.listWidget.clear()
@@ -46,7 +48,7 @@ class PossiblesValuesForm(QtWidgets.QWidget):
                 "Тип свойства не задан"
             )
             return
-        
+
         if self.ui.inputLine_2.text() != "":
             if self.ui.inputLine_2.text() != "исчислимый" and\
                 self.ui.inputLine_2.text() != "перечислимый":
@@ -56,7 +58,7 @@ class PossiblesValuesForm(QtWidgets.QWidget):
                     "Неверный тип свойства"
                 )
                 return
-        
+
         if not (self.checkValues(PROPERTIES.values(), self.ui.inputLine.text()) and self.ui.inputLine.text() != ""):
             QtWidgets.QMessageBox.warning(
                 self,
@@ -64,7 +66,7 @@ class PossiblesValuesForm(QtWidgets.QWidget):
                 "Элемент уже есть или поле ввода пустое"
             )
             return
-        
+
         PROPERTIES[self.ui.propertiesList.currentText()]["тип"] = self.ui.inputLine_2.text()
         PROPERTIES[self.ui.propertiesList.currentText()]["значения"]\
             .append(self.ui.inputLine.text())

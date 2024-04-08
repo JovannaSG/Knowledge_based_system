@@ -15,16 +15,16 @@ class CheckFullKwnoledgeForm(QtWidgets.QWidget):
 
         # filling alloy list
         flag = False
-        for i in ALLOYS.keys():
-            for prop in ALLOYS[i]:
+        for alloy_key in ALLOYS.keys():
+            for prop in ALLOYS[alloy_key]:
                 if prop[1] is None:
-                    self.ui.listWidget_3.addItem(i)
+                    self.ui.listWidget_3.addItem(alloy_key)
                     flag = True
                     break
 
-        for i in PROPERTIES.keys():
-            if PROPERTIES[i] == []:
-                self.ui.listWidget.addItem(i)
+        for prop_key in PROPERTIES.keys():
+            if PROPERTIES[prop_key]["значения"] == []:
+                self.ui.listWidget.addItem(prop_key)
                 flag = True
 
         if flag:

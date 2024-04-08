@@ -67,6 +67,9 @@ class Ui_PossiblesValues(object):
         font.setPointSize(10)
         self.label_2.setFont(font)
         self.label_2.setObjectName("label_2")
+        self.comboBox = QtWidgets.QComboBox(PossiblesValues)
+        self.comboBox.setGeometry(QtCore.QRect(420, 330, 331, 21))
+        self.comboBox.setObjectName("comboBox")
 
         self.retranslateUi(PossiblesValues)
         QtCore.QMetaObject.connectSlotsByName(PossiblesValues)
@@ -77,4 +80,4 @@ class Ui_PossiblesValues(object):
         self.label.setText(_translate("PossiblesValues", "Введите ..."))
         self.pushButton.setText(_translate("PossiblesValues", "Добавить"))
         self.label_4.setText(_translate("PossiblesValues", "Для удаления объекта из списка дважды кликните по нему"))
-        self.label_2.setText(_translate("PossiblesValues", "Введите тип свойства (исчеляемый, перечислимый)"))
+        self.label_2.setText(_translate("PossiblesValues", "Введите тип свойства (исчислимый, перечислимый)"))

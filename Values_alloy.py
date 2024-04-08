@@ -67,7 +67,7 @@ class ValuesAlloyForm(QtWidgets.QWidget):
             self.ui.listWidget.addWidget(input_field)
         else:
             self._FLAG_ACCEPT_BTN = True
-            
+
             for prop_value in PROPERTIES[self.ui.propertyList.currentItem().text()]["значения"]:
                 radioBtn = QtWidgets.QRadioButton(prop_value)
                 radioBtn.setGeometry(200, 150, 120, 40)
@@ -112,7 +112,7 @@ class ValuesAlloyForm(QtWidgets.QWidget):
                 w: QtWidgets.QWidget = self.ui.listWidget.itemAt(i).widget()
                 if w.text() != "":
                     try:
-                        _range = PROPERTIES[self.ui.propertyList.currentItem().text()][0].split(" ")
+                        _range = PROPERTIES[self.ui.propertyList.currentItem().text()]["значения"][0].split(" ")
                         if float(w.text()) < float(_range[0]) or\
                             float(w.text()) > float(_range[2]):
                             QtWidgets.QMessageBox.warning(
