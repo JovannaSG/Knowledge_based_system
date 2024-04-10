@@ -58,7 +58,7 @@
     </font>
    </property>
    <property name="text">
-    <string>Ввод исходных данных</string>
+    <string>Решатель задач</string>
    </property>
   </widget>
  </widget>

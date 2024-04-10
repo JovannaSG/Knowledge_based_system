@@ -8,7 +8,7 @@ ALLOYS = dict()
 class DB():
     @staticmethod
     def fillingDB() -> None:
-        with open("DB/props1.json", "r", encoding="utf-8") as f:
+        with open("DB/props.json", "r", encoding="utf-8") as f:
             props = json.load(f)
             for el in props:
                 PROPERTIES[el] = props[el]

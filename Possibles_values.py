@@ -116,7 +116,39 @@ class PossiblesValuesForm(QtWidgets.QWidget):
                     "Информация",
                     "Элемент успешно добавлен"
                 )
-            self.ui.inputLine.clear()
+        elif PROPERTIES[self.ui.propertiesList.currentText()]["тип"] is None:
+            if self.ui.comboBox.currentText() == "перечислимый":
+                PROPERTIES[self.ui.propertiesList.currentText()]["тип"] = self.ui.comboBox.currentText()
+                PROPERTIES[self.ui.propertiesList.currentText()]["значения"]\
+                    .append(self.ui.inputLine.text())
+                self.updateList()
+                QtWidgets.QMessageBox.about(
+                    self,
+                    "Информация",
+                    "Элемент успешно добавлен"
+                )
+            if self.ui.comboBox.currentText() == "исчислимый":
+                regex = re.compile(self._REGEX_CALC_TYPE)
+                if not regex.match(self.ui.inputLine.text()):
+                    QtWidgets.QMessageBox.warning(
+                        self,
+                        "Информация",
+                        "Значение диапозона введено неверно"
+                    )
+                else:
+                    PROPERTIES[self.ui.propertiesList.currentText()]["тип"] = self.ui.comboBox.currentText()
+                    if len(PROPERTIES[self.ui.propertiesList.currentText()]["значения"]) == 0:
+                        PROPERTIES[self.ui.propertiesList.currentText()]["значения"]\
+                            .append(self.ui.inputLine.text())
+                    else:
+                        PROPERTIES[self.ui.propertiesList.currentText()]["значения"][0] = self.ui.inputLine.text()
+                    self.updateList()
+                    QtWidgets.QMessageBox.about(
+                        self,
+                        "Информация",
+                        "Элемент успешно добавлен"
+                    )
+        self.ui.inputLine.clear()
 
     def changeTextOnLabel(self) -> None:
         if self.ui.propertiesList.currentText() == "Способ обработки":

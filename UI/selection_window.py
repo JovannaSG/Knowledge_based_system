@@ -37,4 +37,4 @@ class Ui_selectionWindow(object):
         _translate = QtCore.QCoreApplication.translate
         selectionWindow.setWindowTitle(_translate("selectionWindow", "Окно выбора"))
         self.openKnowledgeEditorWindow.setText(_translate("selectionWindow", "Редактор базы знаний"))
-        self.openInputDataWindow.setText(_translate("selectionWindow", "Ввод исходных данных"))
+        self.openInputDataWindow.setText(_translate("selectionWindow", "Решатель задач"))

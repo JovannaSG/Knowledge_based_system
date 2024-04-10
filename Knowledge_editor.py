@@ -152,5 +152,5 @@ class Example(QtWidgets.QMainWindow):
     # on close mainWindow
     def closeEvent(self, event) -> None:
         DB.saveDataDB(ALLOYS, "alloys")
-        DB.saveDataDB(PROPERTIES, "props1")
+        DB.saveDataDB(PROPERTIES, "props")
         event.accept()

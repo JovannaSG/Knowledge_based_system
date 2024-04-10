@@ -7,7 +7,7 @@ from Selection_window import SelectionWindowForm
 
 
 """
-TODO: убрать вывод пустых свойств
+TODO: убрать вывод пустых свойств в решателе задач
 """
 
 
