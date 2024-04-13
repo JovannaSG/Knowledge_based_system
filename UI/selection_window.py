@@ -18,11 +18,15 @@ class Ui_selectionWindow(object):
         selectionWindow.setMinimumSize(QtCore.QSize(500, 301))
         selectionWindow.setMaximumSize(QtCore.QSize(500, 301))
         self.openKnowledgeEditorWindow = QtWidgets.QPushButton(selectionWindow)
-        self.openKnowledgeEditorWindow.setGeometry(QtCore.QRect(120, 50, 261, 61))
+        self.openKnowledgeEditorWindow.setGeometry(
+            QtCore.QRect(120, 50, 261, 61)
+        )
         font = QtGui.QFont()
         font.setPointSize(12)
         self.openKnowledgeEditorWindow.setFont(font)
-        self.openKnowledgeEditorWindow.setObjectName("openKnowledgeEditorWindow")
+        self.openKnowledgeEditorWindow.setObjectName(
+            "openKnowledgeEditorWindow"
+        )
         self.openInputDataWindow = QtWidgets.QPushButton(selectionWindow)
         self.openInputDataWindow.setGeometry(QtCore.QRect(120, 150, 261, 61))
         font = QtGui.QFont()
@@ -35,6 +39,21 @@ class Ui_selectionWindow(object):
 
     def retranslateUi(self, selectionWindow):
         _translate = QtCore.QCoreApplication.translate
-        selectionWindow.setWindowTitle(_translate("selectionWindow", "Окно выбора"))
-        self.openKnowledgeEditorWindow.setText(_translate("selectionWindow", "Редактор базы знаний"))
-        self.openInputDataWindow.setText(_translate("selectionWindow", "Решатель задач"))
+        selectionWindow.setWindowTitle(
+            _translate(
+                "selectionWindow",
+                "Окно выбора"
+            )
+        )
+        self.openKnowledgeEditorWindow.setText(
+            _translate(
+                "selectionWindow",
+                "Редактор базы знаний"
+            )
+        )
+        self.openInputDataWindow.setText(
+            _translate(
+                "selectionWindow",
+                "Решатель задач"
+            )
+        )

@@ -7,7 +7,7 @@ from db import PROPERTIES, ALLOYS
 
 
 class InputDataForm(QtWidgets.QWidget):
-    _FLAG_ACCEPT_BTN: bool = True
+    _flag_accept_btn: bool = True
     # _REGEX_CALC_TYPE = r"\d+.?\d+ - \d+.?\d+"
     # _REGEX_REAL_NUMBER = r"\d+[.]\d+"
     # [-+]?[0-9]*\.?[0-9]*
@@ -54,7 +54,7 @@ class InputDataForm(QtWidgets.QWidget):
 
         # check property type
         if PROPERTIES[self.ui.propertyList.currentItem().text()]["тип"] == "исчислимый":
-            self._FLAG_ACCEPT_BTN = False
+            self._flag_accept_btn = False
 
             input_field = QtWidgets.QLineEdit()
             input_field.setFixedWidth(525)
@@ -67,7 +67,7 @@ class InputDataForm(QtWidgets.QWidget):
             input_field.returnPressed.connect(self.addInputFieldResultList)
             self.ui.listWidget_4.addWidget(input_field)
         else:
-            self._FLAG_ACCEPT_BTN = True
+            self._flag_accept_btn = True
  
             for prop_value in PROPERTIES[self.ui.propertyList.currentItem().text()]["значения"]:
                 radioBtn = QtWidgets.QRadioButton(prop_value)

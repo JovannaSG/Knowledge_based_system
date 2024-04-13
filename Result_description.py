@@ -56,8 +56,6 @@ class ResultDescriptionForm(QtWidgets.QWidget):
             s = "Подходящие виды сплавов:\n"
             for key in self._right_alloys.keys():
                 s += f"«{key}»\n"
-                #for value in self._right_alloys[key]:
-                #    s += f"\t{value}\n"
             s += "\nДругие виды сплавов опровергнуты по следующим причинам:\n"
             for alloy in ALLOYS.keys():
                 if alloy not in self._right_alloys:

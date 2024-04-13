@@ -76,5 +76,15 @@ class Ui_PossiblesValues(object):
         PossiblesValues.setWindowTitle(_translate("PossiblesValues", "Form"))
         self.label.setText(_translate("PossiblesValues", "Введите ..."))
         self.pushButton.setText(_translate("PossiblesValues", "Добавить"))
-        self.label_4.setText(_translate("PossiblesValues", "Для удаления объекта из списка дважды кликните по нему"))
-        self.label_2.setText(_translate("PossiblesValues", "Выберите тип свойства"))
+        self.label_4.setText(
+            _translate(
+                "PossiblesValues",
+                "Для удаления объекта из списка дважды кликните по нему"
+            )
+        )
+        self.label_2.setText(
+            _translate(
+                "PossiblesValues",
+                "Выберите тип свойства"
+            )
+        )

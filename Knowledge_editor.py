@@ -9,6 +9,9 @@ from db import DB, PROPERTIES, ALLOYS
 
 
 class Example(QtWidgets.QMainWindow):
+    # _add_alloy_flag = False
+    # _add_prop_flag = False
+
     def __init__(self) -> None:
         super().__init__()
         self.ui = Ui_KnowledgeEditor()
@@ -26,11 +29,9 @@ class Example(QtWidgets.QMainWindow):
         self.ui.printValuesAlloyBtn.clicked.connect(self.printValuesAlloy)
         self.ui.addButton.clicked.connect(self.add)
         self.ui.CheckFullKnowledge.clicked.connect(self.isFullKnowledge)
-
-        # for removal functional
         self.ui.resultList.itemDoubleClicked.connect(self.delElement)
 
-    # checking when deleting
+    # check when deleting
     def checkBtn(self) -> bool:
         dlg = QtWidgets.QMessageBox(self)
         dlg.setWindowTitle("Удаление")

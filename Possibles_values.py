@@ -177,7 +177,7 @@ class PossiblesValuesForm(QtWidgets.QWidget):
                         str(PROPERTIES[i]["значения"][j])
                     )
 
-    # checking when deleting
+    # check when deleting
     def checkBtn(self) -> bool:
         dlg = QtWidgets.QMessageBox(self)
         dlg.setWindowTitle("Удаление")
