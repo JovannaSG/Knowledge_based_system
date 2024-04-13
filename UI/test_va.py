@@ -37,22 +37,31 @@ class Ui_ValuesAlloy(object):
         self.pushButton.setObjectName("pushButton")
         self.scrollArea = QtWidgets.QScrollArea(ValuesAlloy)
         self.scrollArea.setGeometry(QtCore.QRect(630, 100, 550, 390))
-        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed)
+        sizePolicy = QtWidgets.QSizePolicy(
+            QtWidgets.QSizePolicy.Fixed,
+            QtWidgets.QSizePolicy.Fixed
+        )
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
-        sizePolicy.setHeightForWidth(self.scrollArea.sizePolicy().hasHeightForWidth())
+        sizePolicy.setHeightForWidth(
+            self.scrollArea.sizePolicy().hasHeightForWidth()
+        )
         self.scrollArea.setSizePolicy(sizePolicy)
         self.scrollArea.setMinimumSize(QtCore.QSize(550, 390))
         self.scrollArea.setMaximumSize(QtCore.QSize(550, 390))
         self.scrollArea.setBaseSize(QtCore.QSize(550, 390))
         self.scrollArea.setVerticalScrollBarPolicy(QtCore.Qt.ScrollBarAlwaysOn)
-        self.scrollArea.setHorizontalScrollBarPolicy(QtCore.Qt.ScrollBarAlwaysOff)
+        self.scrollArea.setHorizontalScrollBarPolicy(
+            QtCore.Qt.ScrollBarAlwaysOff
+        )
         self.scrollArea.setWidgetResizable(True)
         self.scrollArea.setObjectName("scrollArea")
         self.scrollAreaWidgetContents = QtWidgets.QWidget()
         self.scrollAreaWidgetContents.setGeometry(QtCore.QRect(0, 0, 527, 388))
         self.scrollAreaWidgetContents.setObjectName("scrollAreaWidgetContents")
-        self.verticalLayoutWidget = QtWidgets.QWidget(self.scrollAreaWidgetContents)
+        self.verticalLayoutWidget = QtWidgets.QWidget(
+            self.scrollAreaWidgetContents
+        )
         self.verticalLayoutWidget.setGeometry(QtCore.QRect(0, 0, 551, 391))
         self.verticalLayoutWidget.setObjectName("verticalLayoutWidget")
         self.listWidget = QtWidgets.QVBoxLayout(self.verticalLayoutWidget)

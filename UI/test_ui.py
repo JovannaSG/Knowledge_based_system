@@ -45,12 +45,18 @@ class Ui_KnowledgeEditor(object):
         font.setPointSize(14)
         self.printPossibleValuesBtn.setFont(font)
         self.printPossibleValuesBtn.setObjectName("printPossibleValuesBtn")
-        self.printDescriptionPropertiesBtn = QtWidgets.QPushButton(self.centralwidget)
-        self.printDescriptionPropertiesBtn.setGeometry(QtCore.QRect(10, 300, 281, 61))
+        self.printDescriptionPropertiesBtn = QtWidgets.QPushButton(
+            self.centralwidget
+        )
+        self.printDescriptionPropertiesBtn.setGeometry(
+            QtCore.QRect(10, 300, 281, 61)
+        )
         font = QtGui.QFont()
         font.setPointSize(14)
         self.printDescriptionPropertiesBtn.setFont(font)
-        self.printDescriptionPropertiesBtn.setObjectName("printDescriptionPropertiesBtn")
+        self.printDescriptionPropertiesBtn.setObjectName(
+            "printDescriptionPropertiesBtn"
+        )
         self.printValuesAlloyBtn = QtWidgets.QPushButton(self.centralwidget)
         self.printValuesAlloyBtn.setGeometry(QtCore.QRect(10, 380, 281, 71))
         font = QtGui.QFont()
@@ -108,16 +114,61 @@ class Ui_KnowledgeEditor(object):
 
     def retranslateUi(self, KnowledgeEditor):
         _translate = QtCore.QCoreApplication.translate
-        KnowledgeEditor.setWindowTitle(_translate("KnowledgeEditor", "MainWindow"))
-        self.printAlloysBtn.setText(_translate("KnowledgeEditor", "Виды сплавов алюминия"))
-        self.printPropertiesBtn.setText(_translate("KnowledgeEditor", "Свойства"))
-        self.printPossibleValuesBtn.setText(_translate("KnowledgeEditor", "Возможные значения"))
-        self.printDescriptionPropertiesBtn.setText(_translate("KnowledgeEditor", "Описание свойств\n"
-"вида сплава"))
-        self.printValuesAlloyBtn.setText(_translate("KnowledgeEditor", "Значения для вида \n"
-"сплава"))
-        self.label.setText(_translate("KnowledgeEditor", "Редактор базы знаний"))
+        KnowledgeEditor.setWindowTitle(
+            _translate(
+                "KnowledgeEditor",
+                "MainWindow"
+            )
+        )
+        self.printAlloysBtn.setText(
+            _translate(
+                "KnowledgeEditor",
+                "Виды сплавов алюминия"
+            )
+        )
+        self.printPropertiesBtn.setText(
+            _translate(
+                "KnowledgeEditor",
+                "Свойства"
+            )
+        )
+        self.printPossibleValuesBtn.setText(
+            _translate(
+                "KnowledgeEditor",
+                "Возможные значения"
+            )
+        )
+        self.printDescriptionPropertiesBtn.setText(
+            _translate(
+                "KnowledgeEditor",
+                "Описание свойств\n"
+                "вида сплава"
+            )
+        )
+        self.printValuesAlloyBtn.setText(
+            _translate(
+                "KnowledgeEditor",
+                "Значения для вида \n"
+                "сплава"
+            )
+        )
+        self.label.setText(
+            _translate(
+                "KnowledgeEditor",
+                "Редактор базы знаний"
+            )
+        )
         self.label_2.setText(_translate("KnowledgeEditor", "Введите ..."))
         self.addButton.setText(_translate("KnowledgeEditor", "Добавить"))
-        self.label_3.setText(_translate("KnowledgeEditor", "Для удаления объекта из списка дважды кликните по нему"))
-        self.CheckFullKnowledge.setText(_translate("KnowledgeEditor", "Проверка полноты знаний"))
+        self.label_3.setText(
+            _translate(
+                "KnowledgeEditor",
+                "Для удаления объекта из списка дважды кликните по нему"
+            )
+        )
+        self.CheckFullKnowledge.setText(
+            _translate(
+                "KnowledgeEditor",
+                "Проверка полноты знаний"
+            )
+        )

@@ -9,6 +9,9 @@ from db import DB, PROPERTIES, ALLOYS
 
 
 class Example(QtWidgets.QMainWindow):
+    # _add_alloy_flag = False
+    # _add_prop_flag = False
+
     def __init__(self) -> None:
         super().__init__()
         self.ui = Ui_KnowledgeEditor()
@@ -26,11 +29,9 @@ class Example(QtWidgets.QMainWindow):
         self.ui.printValuesAlloyBtn.clicked.connect(self.printValuesAlloy)
         self.ui.addButton.clicked.connect(self.add)
         self.ui.CheckFullKnowledge.clicked.connect(self.isFullKnowledge)
-
-        # for removal functional
         self.ui.resultList.itemDoubleClicked.connect(self.delElement)
 
-    # checking when deleting
+    # check when deleting
     def checkBtn(self) -> bool:
         dlg = QtWidgets.QMessageBox(self)
         dlg.setWindowTitle("Удаление")
@@ -67,7 +68,6 @@ class Example(QtWidgets.QMainWindow):
                     if el == self.ui.resultList.currentItem().text():
                         temp_key = el
                 del PROPERTIES[temp_key]
-                DB.saveDataDB(PROPERTIES, "props")
                 QtWidgets.QMessageBox.about(
                     self,
                     "Информация",
@@ -103,7 +103,16 @@ class Example(QtWidgets.QMainWindow):
 
     def add(self) -> None:
         # adding new alloy
-        if self.ui.label_2.text() == "Введите название сплава алюминия":   
+        if self.ui.label_2.text() == "Введите название сплава алюминия":
+            for i in range(self.ui.resultList.count()):
+                if self.ui.lineEdit.text() == self.ui.resultList.item(i).text():
+                    QtWidgets.QMessageBox.warning(
+                        self,
+                        "Информация",
+                        "Введенный элемент уже существует"
+                    )
+                    return
+
             if self.ui.lineEdit.text() != "":
                 ALLOYS[self.ui.lineEdit.text()] = []
                 QtWidgets.QMessageBox.about(
@@ -124,6 +133,15 @@ class Example(QtWidgets.QMainWindow):
 
         #adding new property
         if self.ui.label_2.text() == "Введите название свойства":
+            for i in range(self.ui.resultList.count()):
+                if self.ui.lineEdit.text() == self.ui.resultList.item(i).text():
+                    QtWidgets.QMessageBox.warning(
+                        self,
+                        "Информация",
+                        "Введенный элемент уже существует"
+                    )
+                    return
+
             if self.ui.lineEdit.text() != "":
                 PROPERTIES[self.ui.lineEdit.text()] = {
                     "тип": None,

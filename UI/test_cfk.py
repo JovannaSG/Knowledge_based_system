@@ -68,4 +68,9 @@ class Ui_Form(object):
         Form.setWindowTitle(_translate("Form", "Form"))
         self.label_3.setText(_translate("Form", "Виды сплавов"))
         self.label_4.setText(_translate("Form", "Незаполненные свойства"))
-        self.label_5.setText(_translate("Form", "Незаполненные свойства сплава"))
+        self.label_5.setText(
+            _translate(
+                "Form",
+                "Незаполненные свойства сплава"
+            )
+        )
