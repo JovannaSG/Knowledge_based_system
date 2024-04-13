@@ -9,13 +9,15 @@ from db import DB, PROPERTIES, ALLOYS
 
 
 class Example(QtWidgets.QMainWindow):
-    # _add_alloy_flag = False
-    # _add_prop_flag = False
+    _add_alloy_flag: bool
+    _add_prop_flag: bool
 
     def __init__(self) -> None:
         super().__init__()
         self.ui = Ui_KnowledgeEditor()
         self.ui.setupUi(self)
+        self._add_alloy_flag = False
+        self._add_prop_flag = False
 
         # connect signals to buttons
         self.ui.printAlloysBtn.clicked.connect(self.printAlloys)
@@ -81,6 +83,8 @@ class Example(QtWidgets.QMainWindow):
         self.ui.resultList.clear()
         for i in range(len(ALLOYS.keys())):
             self.ui.resultList.insertItem(i, list(ALLOYS)[i])
+        self._add_alloy_flag = True
+        self._add_prop_flag = False
 
     def printProperties(self) -> None:
         self.ui.label_2.setText("Введите название свойства")
@@ -88,6 +92,8 @@ class Example(QtWidgets.QMainWindow):
         self.ui.resultList.clear()
         for i in range(len(PROPERTIES)):
             self.ui.resultList.insertItem(i, list(PROPERTIES)[i])
+        self._add_alloy_flag = False
+        self._add_prop_flag = True
 
     def printPossiblesValues(self) -> None:
         self.form = PossiblesValuesForm()
@@ -103,7 +109,7 @@ class Example(QtWidgets.QMainWindow):
 
     def add(self) -> None:
         # adding new alloy
-        if self.ui.label_2.text() == "Введите название сплава алюминия":
+        if self._add_alloy_flag:
             for i in range(self.ui.resultList.count()):
                 if self.ui.lineEdit.text() == self.ui.resultList.item(i).text():
                     QtWidgets.QMessageBox.warning(
@@ -132,7 +138,7 @@ class Example(QtWidgets.QMainWindow):
                 )
 
         #adding new property
-        if self.ui.label_2.text() == "Введите название свойства":
+        if self._add_prop_flag:
             for i in range(self.ui.resultList.count()):
                 if self.ui.lineEdit.text() == self.ui.resultList.item(i).text():
                     QtWidgets.QMessageBox.warning(
