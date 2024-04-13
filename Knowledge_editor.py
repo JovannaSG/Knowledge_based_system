@@ -68,7 +68,6 @@ class Example(QtWidgets.QMainWindow):
                     if el == self.ui.resultList.currentItem().text():
                         temp_key = el
                 del PROPERTIES[temp_key]
-                DB.saveDataDB(PROPERTIES, "props")
                 QtWidgets.QMessageBox.about(
                     self,
                     "Информация",
@@ -104,7 +103,16 @@ class Example(QtWidgets.QMainWindow):
 
     def add(self) -> None:
         # adding new alloy
-        if self.ui.label_2.text() == "Введите название сплава алюминия":   
+        if self.ui.label_2.text() == "Введите название сплава алюминия":
+            for i in range(self.ui.resultList.count()):
+                if self.ui.lineEdit.text() == self.ui.resultList.item(i).text():
+                    QtWidgets.QMessageBox.warning(
+                        self,
+                        "Информация",
+                        "Введенный элемент уже существует"
+                    )
+                    return
+
             if self.ui.lineEdit.text() != "":
                 ALLOYS[self.ui.lineEdit.text()] = []
                 QtWidgets.QMessageBox.about(
@@ -125,6 +133,15 @@ class Example(QtWidgets.QMainWindow):
 
         #adding new property
         if self.ui.label_2.text() == "Введите название свойства":
+            for i in range(self.ui.resultList.count()):
+                if self.ui.lineEdit.text() == self.ui.resultList.item(i).text():
+                    QtWidgets.QMessageBox.warning(
+                        self,
+                        "Информация",
+                        "Введенный элемент уже существует"
+                    )
+                    return
+
             if self.ui.lineEdit.text() != "":
                 PROPERTIES[self.ui.lineEdit.text()] = {
                     "тип": None,
