@@ -9,15 +9,12 @@ from db import DB, PROPERTIES, ALLOYS
 
 
 class Example(QtWidgets.QMainWindow):
-    _add_alloy_flag: bool
-    _add_prop_flag: bool
+    _change_add: bool
 
     def __init__(self) -> None:
         super().__init__()
         self.ui = Ui_KnowledgeEditor()
         self.ui.setupUi(self)
-        self._add_alloy_flag = False
-        self._add_prop_flag = False
 
         # connect signals to buttons
         self.ui.printAlloysBtn.clicked.connect(self.printAlloys)
@@ -53,7 +50,7 @@ class Example(QtWidgets.QMainWindow):
     def delElement(self) -> None:
         temp_key = ""
         if self.checkBtn():
-            if self.ui.label_2.text() == "Введите название сплава алюминия":   
+            if self.ui.label_2.text() == "Введите название сплава алюминия":
                 for el in ALLOYS:
                     if el == self.ui.resultList.currentItem().text():
                         temp_key = el
@@ -78,22 +75,20 @@ class Example(QtWidgets.QMainWindow):
                 self.printProperties()
 
     def printAlloys(self) -> None:
+        self._change_add = True
         self.ui.label_2.setText("Введите название сплава алюминия")
         self.ui.lineEdit.clear()
         self.ui.resultList.clear()
         for i in range(len(ALLOYS.keys())):
             self.ui.resultList.insertItem(i, list(ALLOYS)[i])
-        self._add_alloy_flag = True
-        self._add_prop_flag = False
 
     def printProperties(self) -> None:
+        self._change_add = False
         self.ui.label_2.setText("Введите название свойства")
         self.ui.lineEdit.clear()
         self.ui.resultList.clear()
         for i in range(len(PROPERTIES)):
             self.ui.resultList.insertItem(i, list(PROPERTIES)[i])
-        self._add_alloy_flag = False
-        self._add_prop_flag = True
 
     def printPossiblesValues(self) -> None:
         self.form = PossiblesValuesForm()
@@ -109,7 +104,7 @@ class Example(QtWidgets.QMainWindow):
 
     def add(self) -> None:
         # adding new alloy
-        if self._add_alloy_flag:
+        if self._change_add == True:
             for i in range(self.ui.resultList.count()):
                 if self.ui.lineEdit.text() == self.ui.resultList.item(i).text():
                     QtWidgets.QMessageBox.warning(
@@ -127,8 +122,7 @@ class Example(QtWidgets.QMainWindow):
                     "Элемент успешно добавлен"
                 )
                 self.ui.resultList.clear()
-                for i in range(len(ALLOYS.keys())):
-                    self.ui.resultList.insertItem(i, list(ALLOYS)[i])
+                self.printAlloys()
                 self.ui.lineEdit.clear()
             else:
                 QtWidgets.QMessageBox.warning(
@@ -138,7 +132,7 @@ class Example(QtWidgets.QMainWindow):
                 )
 
         #adding new property
-        if self._add_prop_flag:
+        if self._change_add == False:
             for i in range(self.ui.resultList.count()):
                 if self.ui.lineEdit.text() == self.ui.resultList.item(i).text():
                     QtWidgets.QMessageBox.warning(
@@ -154,8 +148,7 @@ class Example(QtWidgets.QMainWindow):
                     "значения": []
                 }
                 self.ui.resultList.clear()
-                for i in range(len(PROPERTIES)):
-                    self.ui.resultList.insertItem(i, list(PROPERTIES)[i])
+                self.printProperties()
                 QtWidgets.QMessageBox.about(
                     self,
                     "Информация",
