@@ -17,7 +17,6 @@ class ResultDescriptionForm(QtWidgets.QWidget):
 
     def descrptionResult(self, result_list: dict) -> None:
         c = len(result_list)
-
         if c == 0:
             self.printAnswer()
             return
@@ -33,8 +32,6 @@ class ResultDescriptionForm(QtWidgets.QWidget):
                         i += 1
                     else:
                         wrong.append(el)
-                else:
-                    wrong.append(el)
             if i == c:
                 self._right_alloys[key] = right
             else:
@@ -57,9 +54,8 @@ class ResultDescriptionForm(QtWidgets.QWidget):
             for key in self._right_alloys.keys():
                 s += f"«{key}»\n"
             s += "\nДругие виды сплавов опровергнуты по следующим причинам:\n"
-            for alloy in ALLOYS.keys():
-                if alloy not in self._right_alloys:
-                    s += f"\nВид сплава «{alloy}» опровергнут, так как\n"
-                    for value in ALLOYS[alloy]:
-                        s += f"значение «{value[1]}» свойства «{value[0]}» не соответствует описанию вида сплава\n"
+            for alloy in self._wrong_alloys.keys():
+                s += f"\nВид сплава «{alloy}» опровергнут, так как\n"
+                for k in self._wrong_alloys[alloy]:
+                    s += f"значение «{k[1]}» свойства «{k[0]}» не соответствует описанию вида сплава\n"
         self.ui.textEdit.setText(s)
