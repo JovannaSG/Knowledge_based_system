@@ -8,7 +8,7 @@ from db import PROPERTIES
 
 class PossiblesValuesForm(QtWidgets.QWidget):
     #r"\d+.?\d+ - \d+.?\d+"
-    _REGEX_CALC_TYPE = r"[0-9]*\.?[0-9]* - [0-9]+"
+    _REGEX_CALC_TYPE = r"[0-9]+\.?[0-9]+ - [0-9]+\.?[0-9]+"
 
     def __init__(self) -> None:
         super().__init__()
